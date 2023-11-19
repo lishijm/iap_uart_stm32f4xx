@@ -51,7 +51,7 @@ void Flash_Erase(void){
   }
 }
     
-void Flash_Write(int16_t *pBuffer,uint32_t  NumToWrite){
+uint32_t Flash_Write(uint32_t *pBuffer,uint32_t  NumToWrite){
   uint32_t  counter=0;
   uint32_t Address = FLASH_USER_START_ADDR;
 
@@ -60,7 +60,7 @@ void Flash_Write(int16_t *pBuffer,uint32_t  NumToWrite){
   
   while ((Address < FLASH_USER_END_ADDR) && (counter<NumToWrite)){
     if (HAL_FLASH_Program(FLASH_TYPEPROGRAM_HALFWORD, Address, pBuffer[counter]) == HAL_OK){
-      Address = Address + 2;  //address move back 2 bytes
+      Address = Address + 4;  //address move back 4 bytes
       counter++;
     }
     else{
@@ -69,14 +69,16 @@ void Flash_Write(int16_t *pBuffer,uint32_t  NumToWrite){
   }
   
   HAL_FLASH_Lock();   //上锁
+
+  return (FLASHIF_OK);
 }
 
-void Flash_Read(int16_t *pBuffer,uint32_t  NumToRead){
+void Flash_Read(uint32_t *pBuffer,uint32_t  NumToRead){
   uint32_t  counter=0;
   uint32_t Address = FLASH_USER_START_ADDR;
 
   while ( (Address < FLASH_USER_END_ADDR) && (counter<NumToRead)){
-    pBuffer[counter++]= *(__IO uint16_t *)Address;  
-    Address = Address + 2;  //address move back 2 bytes
+    pBuffer[counter++]= *(__IO uint32_t *)Address;  
+    Address = Address + 4;  //address move back 4 bytes
   }
 }

@@ -16,7 +16,7 @@
         <TargetCommonOption>
           <Device>STM32F401CCUx</Device>
           <Vendor>STMicroelectronics</Vendor>
-          <PackID>Keil.STM32F4xx_DFP.2.17.1</PackID>
+          <PackID>Keil.STM32F4xx_DFP.2.17.0</PackID>
           <PackURL>https://www.keil.com/pack/</PackURL>
           <Cpu>IRAM(0x20000000-0x2000FFFF) IROM(0x8000000-0x803FFFF) CLOCK(25000000) FPU2 CPUTYPE("Cortex-M4") TZ</Cpu>
           <FlashUtilSpec></FlashUtilSpec>
@@ -395,6 +395,26 @@
           <GroupName>Application/User/Core</GroupName>
           <Files>
             <File>
+              <FileName>flash_if.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Core\Src\flash_if.c</FilePath>
+            </File>
+            <File>
+              <FileName>iap.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Core\Src\iap.c</FilePath>
+            </File>
+            <File>
+              <FileName>uart_com.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Core\Src\uart_com.c</FilePath>
+            </File>
+            <File>
+              <FileName>ymodem.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Core\Src\ymodem.c</FilePath>
+            </File>
+            <File>
               <FileName>main.c</FileName>
               <FileType>1</FileType>
               <FilePath>../Core/Src/main.c</FilePath>
@@ -420,19 +440,9 @@
               <FilePath>../Core/Src/stm32f4xx_hal_msp.c</FilePath>
             </File>
             <File>
-              <FileName>flash_if.c</FileName>
+              <FileName>common.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\Core\Src\flash_if.c</FilePath>
-            </File>
-            <File>
-              <FileName>iap.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\Core\Src\iap.c</FilePath>
-            </File>
-            <File>
-              <FileName>uart_com.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\Core\Src\uart_com.c</FilePath>
+              <FilePath>..\Core\Src\common.c</FilePath>
             </File>
           </Files>
         </Group>

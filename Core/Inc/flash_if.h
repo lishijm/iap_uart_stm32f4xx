@@ -2,9 +2,19 @@
 #define __FLASH_IF_H
 
 /* Includes ------------------------------------------------------------------*/
-#include "stm32f4xx_hal_flash_ex.h" 
+#include "main.h"
 
 /* Exported types ------------------------------------------------------------*/
+
+/* Error code */
+enum 
+{
+  FLASHIF_OK = 0,
+  FLASHIF_ERASEKO,
+  FLASHIF_WRITINGCTRL_ERROR,
+  FLASHIF_WRITING_ERROR,
+  FLASHIF_PROTECTION_ERRROR
+};
 /* Exported constants --------------------------------------------------------*/
 
 /* Base address of the Flash sectors */
@@ -15,9 +25,12 @@
 #define ADDR_FLASH_SECTOR_4     ((uint32_t)0x08010000) /* Base address of Sector 4, 64 Kbytes   */
 #define ADDR_FLASH_SECTOR_5     ((uint32_t)0x08020000) /* Base address of Sector 5, 128 Kbytes  */
 
+#define APPLICATION_ADDRESS ADDR_FLASH_SECTOR_1
+#define USER_FLASH_SIZE     ADDR_FLASH_SECTOR_5
+
 void Flash_Erase(void); 
-void Flash_Write(int16_t *pBuffer,uint32_t NumToWrite);
-void Flash_Read(int16_t *pBuffer,uint32_t NumToRead);
+uint32_t Flash_Write(uint32_t *pBuffer,uint32_t NumToWrite);
+void Flash_Read(uint32_t *pBuffer,uint32_t NumToRead);
 #endif  /* __FLASH_IF_H */
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

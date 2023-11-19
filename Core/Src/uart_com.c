@@ -4,9 +4,13 @@
 #include "usart.h"
 #include "iap.h"
 #include "uart_com.h"
+#include "flash_if.h"
+#include "ymodem.h"
+#include "common.h"
 
 __IO uint8_t uart1_rx_buf[16];
 __IO uint8_t uart1_get_new_data=0;
+__IO uint8_t update_flag=0;
 
 void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
 {
@@ -26,7 +30,10 @@ void uart1_data_check(void)
                 switch (uart1_rx_buf[1])
                 {
                 case APP_UPDATE:
+                    update_flag=1;
                     printf("-----APP UPDATE-----\r\n");
+                    Ymodem_Transmit((uint8_t*)APPLICATION_ADDRESS, (const uint8_t*)"UploadedFlashImage.bin", USER_FLASH_SIZE);
+                    printf("----UPDATE ENDING---\r\n");
                     break;
                 case APP_RUN:
                     printf("-----APP RUN-----\r\n");

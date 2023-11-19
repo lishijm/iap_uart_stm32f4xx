@@ -18,7 +18,6 @@ void LoadApplication(uint32_t AppAddr){
         /* 首地址是MSP，地址+4是复位中断服务程序地址 */
 		JumpToApplication=(pFunction)*(__IO uint32_t*)(AppAddr+4);
 
-            
         /* 关闭全局中断 */
         __set_PRIMASK(1);
                  
@@ -31,8 +30,7 @@ void LoadApplication(uint32_t AppAddr){
         HAL_RCC_DeInit();
         
         /* 关闭所有中断，清除所有中断挂起标志 */  
-        for (int counter = 0; counter < 8; counter++)
-        {
+        for (int counter = 0; counter < 8; counter++){
             NVIC->ICER[counter]=0xFFFFFFFF;
             NVIC->ICPR[counter]=0xFFFFFFFF;
         }

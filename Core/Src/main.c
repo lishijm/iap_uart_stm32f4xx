@@ -49,6 +49,7 @@
 /* USER CODE BEGIN PV */
 extern __IO uint8_t uart1_new_data;
 extern __IO uint8_t uart1_rx_buf[20];
+extern __IO uint8_t update_flag;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -105,6 +106,10 @@ int main(void)
     if(HAL_GetTick()%500==0){
       HAL_GPIO_TogglePin(GPIOC,GPIO_PIN_13);
       HAL_Delay(1);
+    }
+    if(15000<HAL_GetTick()&&0==update_flag){
+      printf("-----APP RUN-----\r\n");
+      LoadApplication(APP_START_ADDR);
     }
     /* USER CODE END WHILE */
 
